@@ -17,7 +17,7 @@ Snake::Snake() : direction_(Direction::Up), hitSelf_(false)
 {
 	initNodes();
 
-	pickupBuffer_.loadFromFile("Sounds/pickup.aiff");
+	pickupBuffer_.loadFromFile("Sounds/pickup.wav");
 	pickupSound_.setBuffer(pickupBuffer_);
 	pickupSound_.setVolume(30);
 
