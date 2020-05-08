@@ -4,15 +4,14 @@
 
 using namespace sfSnake;
 
-const float SnakeNode::Width = 10.f;
-const float SnakeNode::Height = 10.f;
+const float SnakeNode::Radius = 10.f;
 
 SnakeNode::SnakeNode(sf::Vector2f position)
 : position_(position)
 {
 	shape_.setPosition(position_);
 	shape_.setFillColor(sf::Color::Green);
-	shape_.setSize(sf::Vector2f(SnakeNode::Width, SnakeNode::Height));
+	shape_.setRadius(SnakeNode::Radius);
 	shape_.setOutlineColor(sf::Color::White);
 	shape_.setOutlineThickness(-1.f);
 }

@@ -8,3 +8,4 @@ Release/
 *.exe
 sfml2.5/
 Makefile
+.vscode/

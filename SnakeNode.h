@@ -20,11 +20,10 @@ public:
 	sf::Vector2f getPosition() const;
 	sf::FloatRect getBounds() const;
 
-	static const float Width;
-	static const float Height;
+	static const float Radius;
 
 private:
-	sf::RectangleShape shape_;
+	sf::CircleShape shape_;
 	sf::Vector2f position_;
 };
 }
