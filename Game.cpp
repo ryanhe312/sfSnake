@@ -17,6 +17,9 @@ Game::Game()
 	bgMusic_.openFromFile("Music/bg_music.wav");
 	bgMusic_.setLoop(true);
 	bgMusic_.play();
+
+	background.setFillColor(sf::Color::White);
+	background.setSize(sf::Vector2f(Game::Width,Game::Height));
 }
 
 void Game::handleInput()
@@ -29,6 +32,13 @@ void Game::handleInput()
 			window_.close();
 	}
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+		background.setFillColor(sf::Color::White);
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
+		background.setFillColor(sf::Color::Black);
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C))
+		background.setFillColor(sf::Color(150, 75, 0));
+
 	Game::Screen->handleInput(window_);
 }
 
@@ -40,6 +50,7 @@ void Game::update(sf::Time delta)
 void Game::render()
 {
 	window_.clear();
+	window_.draw(background);
 	Game::Screen->render(window_);
 	window_.display();
 }

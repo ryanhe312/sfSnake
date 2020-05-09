@@ -15,6 +15,7 @@ MenuScreen::MenuScreen()
 	text_.setString(
 		"\n\n\n\n\n\n\n\n\nPress [SPACE] to play"
 		"\n\nPress [ESC] to quit");
+	text_.setFillColor(sf::Color::Green);
 
 	snakeText_.setFont(font_);
 	snakeText_.setString("Snake!");

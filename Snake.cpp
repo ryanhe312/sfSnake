@@ -33,7 +33,7 @@ void Snake::initNodes()
 	{
 		nodes_.push_back(SnakeNode(sf::Vector2f(
 			Game::Width / 2 - SnakeNode::Radius / 2,
-			Game::Height / 2 - (SnakeNode::Radius / 2) + (SnakeNode::Radius * i))));
+			Game::Height / 2 - (SnakeNode::Radius / 2) + (SnakeNode::Radius * i * 1.3))));
 	}
 }
 
@@ -84,8 +84,8 @@ void Snake::checkFruitCollisions(std::vector<Fruit>& fruits)
 
 void Snake::grow()
 {
-	nodes_.push_back(SnakeNode(sf::Vector2f(nodes_[nodes_.size() - 1].getPosition().x + SnakeNode::Radius * direction_.x,
-			nodes_[nodes_.size() - 1].getPosition().y + SnakeNode::Radius * direction_.y)));
+	nodes_.push_back(SnakeNode(sf::Vector2f(nodes_[nodes_.size() - 1].getPosition().x,
+			nodes_[nodes_.size() - 1].getPosition().y),nodes_[nodes_.size() - 1].getRotation()));
 }
 
 unsigned Snake::getSize() const
@@ -134,14 +134,17 @@ void Snake::move()
 	for (decltype(nodes_.size()) i = nodes_.size() - 1; i > 0; --i)
 	{
 		nodes_[i].setPosition(nodes_.at(i - 1).getPosition());
+		nodes_[i].setRotation(nodes_.at(i - 1).getRotation());
 	}
 
-	nodes_[0].move(SnakeNode::Radius * direction_.x, SnakeNode::Radius * direction_.y);
-
+	nodes_[0].move(SnakeNode::Radius * 1.5 * direction_.x, SnakeNode::Radius * 1.3 * direction_.y);
+	nodes_[0].setRotation(atan2(direction_.x,-direction_.y) * 180 / 3.14159265);
 }
 
 void Snake::render(sf::RenderWindow& window)
 {
 	for (auto node : nodes_)
-		node.render(window);
+		node.render(window,0);
+	for (auto node : nodes_)
+		node.render(window,1);
 }

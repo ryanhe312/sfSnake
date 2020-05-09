@@ -30,7 +30,8 @@ public:
 private:
 	sf::RenderWindow window_;
 	sf::Music bgMusic_;
-	
+	sf::RectangleShape background;
+
 	static const sf::Time TimePerFrame;
 };
 }
