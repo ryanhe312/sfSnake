@@ -16,7 +16,7 @@ SnakeNode::SnakeNode(sf::Vector2f position, float rotation)
 	shape_.setOrigin(SnakeNode::Radius,SnakeNode::Radius);
 
 	shape_.setOutlineColor(sf::Color::Black);
-	shape_.setOutlineThickness(-0.8);
+	shape_.setOutlineThickness(-0.6);
 
 	deco_.setFillColor(sf::Color::Black);
 	deco_.setSize(sf::Vector2f(2 * SnakeNode::Radius, 0.6* SnakeNode::Radius));

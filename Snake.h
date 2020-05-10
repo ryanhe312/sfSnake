@@ -36,6 +36,9 @@ private:
 
 	bool hitSelf_;
 
+	sf::Sprite head_;
+	sf::Texture texture_;
+
 	sf::Vector2f position_;
 	sf::Vector2f direction_;
 

@@ -25,6 +25,12 @@ Snake::Snake() : hitSelf_(false), direction_(sf::Vector2f(0,-1.0))
 	dieBuffer_.loadFromFile("Sounds/die.wav");
 	dieSound_.setBuffer(dieBuffer_);
 	dieSound_.setVolume(50);
+
+	texture_.loadFromFile("Picture/head.png", sf::IntRect(0, 0, 30, 30));
+	head_.setTexture(texture_);
+	head_.setOrigin(sf::Vector2f(15,15));
+	head_.setPosition(nodes_[0].getPosition());
+	head_.setRotation(nodes_[0].getRotation());
 }
 
 void Snake::initNodes()
@@ -142,6 +148,8 @@ void Snake::move()
 
 	nodes_[0].move(SnakeNode::Radius * 1.3 * direction_.x, SnakeNode::Radius * 1.3 * direction_.y);
 	nodes_[0].setRotation(atan2(direction_.x,-direction_.y) * 180 / 3.14159265);
+	head_.setPosition(nodes_[0].getPosition());
+	head_.setRotation(nodes_[0].getRotation());
 }
 
 void Snake::render(sf::RenderWindow& window)
@@ -150,4 +158,5 @@ void Snake::render(sf::RenderWindow& window)
 		node.render(window,0);
 	for (auto node : nodes_)
 		node.render(window,1);
+	window.draw(head_);
 }
