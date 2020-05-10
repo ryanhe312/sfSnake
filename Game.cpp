@@ -18,8 +18,7 @@ Game::Game()
 	bgMusic_.setLoop(true);
 	bgMusic_.play();
 
-	background.setFillColor(sf::Color::White);
-	background.setSize(sf::Vector2f(Game::Width,Game::Height));
+	bgColor_ = sf::Color::White;
 }
 
 void Game::handleInput()
@@ -33,11 +32,11 @@ void Game::handleInput()
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-		background.setFillColor(sf::Color::White);
+		bgColor_ = sf::Color::White;
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
-		background.setFillColor(sf::Color::Black);
+		bgColor_ = sf::Color::Black;
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C))
-		background.setFillColor(sf::Color(150, 75, 0));
+		bgColor_ = sf::Color(150, 75, 0);
 
 	Game::Screen->handleInput(window_);
 }
@@ -50,9 +49,16 @@ void Game::update(sf::Time delta)
 void Game::render()
 {
 	window_.clear();
-	window_.draw(background);
+	backgroundRender(window_);
 	Game::Screen->render(window_);
 	window_.display();
+}
+
+void Game::backgroundRender(sf::RenderWindow& window)
+{
+	sf::RectangleShape background(sf::Vector2f(Game::Width,Game::Height));
+	background.setFillColor(bgColor_);
+	window_.draw(background);
 }
 
 void Game::run()

@@ -137,7 +137,7 @@ void Snake::move()
 		nodes_[i].setRotation(nodes_.at(i - 1).getRotation());
 	}
 
-	nodes_[0].move(SnakeNode::Radius * 1.5 * direction_.x, SnakeNode::Radius * 1.3 * direction_.y);
+	nodes_[0].move(SnakeNode::Radius * 1.3 * direction_.x, SnakeNode::Radius * 1.3 * direction_.y);
 	nodes_[0].setRotation(atan2(direction_.x,-direction_.y) * 180 / 3.14159265);
 }
 

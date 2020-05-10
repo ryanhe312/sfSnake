@@ -21,6 +21,7 @@ public:
 	void handleInput();
 	void update(sf::Time delta);
 	void render();
+	void backgroundRender(sf::RenderWindow& window);
 
 	static const int Width = 640;
 	static const int Height = 480;
@@ -30,7 +31,7 @@ public:
 private:
 	sf::RenderWindow window_;
 	sf::Music bgMusic_;
-	sf::RectangleShape background;
+	sf::Color bgColor_;
 
 	static const sf::Time TimePerFrame;
 };
