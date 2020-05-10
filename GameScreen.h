@@ -25,7 +25,10 @@ private:
 	Snake snake_;
 	bool lattice_;
 	sf::Color latticeColor_;
+
 	std::vector<Fruit> fruit_;
+
+	static const size_t maxFruit;
 };
 }
 

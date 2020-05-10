@@ -77,7 +77,10 @@ void Snake::checkFruitCollisions(std::vector<Fruit>& fruits)
 	if (toRemove != fruits.end())
 	{
 		pickupSound_.play();
-		grow();
+		for (int i = toRemove->getWeight(); i>0 ; i--)
+		{
+			grow();
+		}
 		fruits.erase(toRemove);
 	}
 }

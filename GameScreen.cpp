@@ -2,12 +2,15 @@
 
 #include <random>
 #include <memory>
+#include <chrono>
 
 #include "GameScreen.h"
 #include "GameOverScreen.h"
 #include "Game.h"
 
 using namespace sfSnake;
+
+const size_t GameScreen::maxFruit = 10;
 
 GameScreen::GameScreen() : snake_()
 {
@@ -35,7 +38,7 @@ void GameScreen::handleInput(sf::RenderWindow& window)
 
 void GameScreen::update(sf::Time delta)
 {
-	if (fruit_.size() == 0)
+	while(fruit_.size() < maxFruit)
 		generateFruit();
 
 	snake_.update(delta);
@@ -76,11 +79,40 @@ void GameScreen::latticeRender(sf::RenderWindow& window)
 
 void GameScreen::generateFruit()
 {
-	static std::default_random_engine engine;
-	engine.seed(time(NULL));
+	static std::default_random_engine engine(std::chrono::system_clock::now().time_since_epoch().count());
 	static std::uniform_int_distribution<int> xDistribution(0, Game::Width - SnakeNode::Radius);
 	static std::uniform_int_distribution<int> yDistribution(0, Game::Height - SnakeNode::Radius);
+	static std::uniform_int_distribution<int> colorDistribution(0,100);
 
-	fruit_.push_back(Fruit(sf::Vector2f(xDistribution(engine), yDistribution(engine))));
+
+	sf::Color fruitColor;
+	int fruitWeight,randomInt = colorDistribution(engine);
+	if(randomInt < 25){
+		if(randomInt % 2 == 0){
+			fruitColor = sf::Color::Black;
+			fruitWeight = 0;
+		}
+		else{
+			fruitColor = sf::Color(150, 75, 0);
+			fruitWeight = 0;
+		}
+	}
+	else{
+		if(randomInt % 3 == 0){
+			fruitColor = sf::Color::Green;
+			fruitWeight = 1;
+		}
+		else if(randomInt % 3 == 1){
+			fruitColor = sf::Color::Blue;
+			fruitWeight = 2;
+		}
+		else{
+			fruitColor = sf::Color::Red;
+			fruitWeight = 3;
+		}
+	}
+
+
+	fruit_.push_back(Fruit(fruitColor,fruitWeight,sf::Vector2f(xDistribution(engine), yDistribution(engine))));
 }
 
